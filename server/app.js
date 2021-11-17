@@ -32,8 +32,20 @@ app.get('/', (req, res) => {
 })
 
 app.post('/send', (req, res) => {
-    console.log(req.body);
-    res.send('Data received');
+    const employee = new Employee({
+        name:req.body.name,
+        email:req.body.email,
+        phone:req.body.phone,
+        salary:req.body.salary,
+        position:req.body.position
+    });
+
+    employee.save().then(data => {
+        console.log(data);
+        res.send('Data received');
+    }).catch(err => {
+        console.log(err);
+    })
 })
 
 app.listen(3000,()=>{
