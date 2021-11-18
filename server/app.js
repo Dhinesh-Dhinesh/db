@@ -48,6 +48,23 @@ app.post('/send', (req, res) => {
     })
 })
 
+app.post('/delete',(req,res)=>{
+    Employee.findByIdAndRemove(req.body.id).then(data=>{
+        console.log(data);
+        console.log('Data deleted');
+        res.send('Data deleted');
+    }).catch(err=>{
+        console.log(err);
+    })
+})
+
 app.listen(3000,()=>{
     console.log('Server started at port 3000');
 })
+
+
+//    "name":"randy",
+//    "email":"dhinesh@gmail.com",
+//    "phone":"9994203075",
+//    "salary":"20000",
+//    "position":"RN"
