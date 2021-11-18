@@ -54,12 +54,12 @@ app.post('/send', (req, res) => {
 //FOR DELETE
 
 app.post('/delete',(req,res)=>{
-    Employee.findByIdAndRemove(req.body.id).then(data=>{           //then catch
+    Employee.findByIdAndRemove(req.body.id).then(data=>{
         console.log(data);
         console.log('Data deleted');
         res.send('Data deleted');
     }).catch(err=>{
-        console.log(err);
+        console.log(err)
     })
 })
 
@@ -72,7 +72,7 @@ app.post('/update',(req,res)=>{
         phone:req.body.phone,
         salary:req.body.salary,
         position:req.body.position
-    }).then(data=>{                                                 //then catch
+    }).then(data=>{                         
         console.log(data);
         res.send('Data updated');
         console.log('Data updated');    
@@ -80,6 +80,8 @@ app.post('/update',(req,res)=>{
         console.log(err);
     })
 })
+
+//PORT
 
 app.listen(3000,()=>{
     console.log('Server started at port 3000');
