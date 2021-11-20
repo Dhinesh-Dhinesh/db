@@ -28,6 +28,10 @@ mongoose.connection.on('error', (err) => {
 })
 
 //---------------//
+app.get('/', (req, res) => {
+    res.send('Hello world');
+})
+
 app.get('/ok', (req, res) => {
     Employee.find({}).then((employees) => {
         res.send(employees);
