@@ -11,7 +11,7 @@ export default function HomeScreen() {
     const [datas, setDatas] = useState([]);
 
     function getData() {
-        fetch('http://10.0.2.2:3000/ok', {
+        fetch('https://fame-server.herokuapp.com/ok', {
             method: 'GET',
             headers: {
                 'Content-Type': 'application/json',
