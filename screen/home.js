@@ -3,12 +3,16 @@ import {
     Text,
     View,
     FlatList,
-    StyleSheet
+    StyleSheet,
+    ScrollView,
+    RefreshControl,
+    Button,
 } from 'react-native';
 
-export default function HomeScreen() {
+export default function HomeScreen({navigation}) {
 
     const [datas, setDatas] = useState([]);
+    const [refresh, setRefreshing] = useState(false);
 
     function getData() {
         fetch('https://fame-server.herokuapp.com/ok', {
@@ -23,7 +27,22 @@ export default function HomeScreen() {
 
     getData();
 
+    const onRefresh = () => {
+        setRefreshing(true);
+        getData();
+        setRefreshing(false);
+    }
+
     return (
+        <ScrollView
+        style={styles.body}
+        refreshControl={
+            <RefreshControl
+                refreshing={refresh}
+                onRefresh={onRefresh}
+            />
+        }>
+        <Button title="Create" onPress={()=> navigation.navigate("CreateUser")}/> 
         <View style={styles.container}>
             <FlatList
                 data={datas}
@@ -42,6 +61,7 @@ export default function HomeScreen() {
                 }}
             />
         </View>
+        </ScrollView>
     );
 }
 
@@ -58,6 +78,11 @@ const styles = StyleSheet.create({
     mongo:{
         color: "#f57",
         marginTop: 10,
+    },
+    body: {
+        flex: 1,
+        flexDirection: 'column',
+        backgroundColor: '#ffffff',
     },
 
 });
