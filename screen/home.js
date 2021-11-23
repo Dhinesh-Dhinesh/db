@@ -4,9 +4,9 @@ import {
     View,
     FlatList,
     StyleSheet,
-    ScrollView,
     RefreshControl,
     Button,
+    SafeAreaView,
 } from 'react-native';
 
 export default function HomeScreen({navigation}) {
@@ -21,8 +21,8 @@ export default function HomeScreen({navigation}) {
                 'Content-Type': 'application/json',
             }
         }).then(res => res.json())
-            .then(data => setDatas(data))
-            .catch(error => console.error(error));
+        .then(data => setDatas(data))
+        .catch(error => console.error(error));
     }
 
     getData();
@@ -33,18 +33,32 @@ export default function HomeScreen({navigation}) {
         setRefreshing(false);
     }
 
+    // const headerFlatList = () => {
+    //     return (
+    //         <View>
+    //         <Button title="Create" onPress={()=> navigation.navigate("CreateUser")}/>
+    //         </View>
+    //     );
+    // }
     return (
-        <ScrollView
+        <SafeAreaView style={styles.container}
         style={styles.body}
         refreshControl={
             <RefreshControl
                 refreshing={refresh}
                 onRefresh={onRefresh}
             />
-        }>
-        <Button title="Create" onPress={()=> navigation.navigate("CreateUser")}/> 
+        }
+        >
+        <View style={styles.btn}>
+            <Button title="Create" onPress={()=> navigation.navigate("CreateUser")}/>
+        </View>
+        <View style={styles.btn}>
+        <Button title="Delete" onPress={()=> navigation.navigate("DeletePage")}/>
+        </View>
         <View style={styles.container}>
             <FlatList
+                // ListHeaderComponent={headerFlatList}
                 data={datas}
                 keyExtractor={(item, index) => index.toString()}
                 renderItem={({ item }) => {
@@ -61,11 +75,15 @@ export default function HomeScreen({navigation}) {
                 }}
             />
         </View>
-        </ScrollView>
+        </SafeAreaView>
     );
 }
 
 const styles = StyleSheet.create({
+    btn:{
+        paddingHorizontal: 25,
+        marginVertical: 2,
+    },
     container: {
         paddingHorizontal: 25,
         marginVertical: 10,
