@@ -42,7 +42,6 @@ export default function HomeScreen({navigation}) {
     // }
     return (
         <SafeAreaView style={styles.container}
-        style={styles.body}
         refreshControl={
             <RefreshControl
                 refreshing={refresh}
