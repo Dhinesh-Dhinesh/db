@@ -55,6 +55,9 @@ export default function HomeScreen({navigation}) {
         <View style={styles.btn}>
         <Button title="Delete" onPress={()=> navigation.navigate("DeletePage")}/>
         </View>
+        <View style={styles.btn}>
+        <Button title="Upload Image" onPress={()=> navigation.navigate("UploadImage")}/>
+        </View>
         <View style={styles.container}>
             <FlatList
                 // ListHeaderComponent={headerFlatList}
