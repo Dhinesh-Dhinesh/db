@@ -5,6 +5,7 @@ import {
     TextInput,
     Button,
     Alert,
+    Image,
 } from 'react-native';
 
 export default function Delete() {

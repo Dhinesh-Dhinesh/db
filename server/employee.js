@@ -8,9 +8,4 @@ const EmployeeSchema = new mongoose.Schema({
    position:String,
 });
 
-const UploaderSchema = new mongoose.Schema({
-   uri:String,
-});
-
 mongoose.model('employee', EmployeeSchema);
-mongoose.model('uploader', UploaderSchema);

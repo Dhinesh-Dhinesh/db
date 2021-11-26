@@ -25,7 +25,8 @@ export default function UploadImager() {
             }
           }
         })();
-      }, []);
+        getImages();
+    }, []);
 
     const pickImage = async () => {
         let result = await ImagePicker.launchImageLibraryAsync({
@@ -63,7 +64,12 @@ export default function UploadImager() {
     }
 
     const getImages = () => {
-        fetch('https://fame-server.herokuapp.com/getImages')
+        fetch('https://fame-server.herokuapp.com/getImages',{
+            method: 'GET',
+            headers: {
+                'Content-Type': 'application/json',
+            }
+        })
         .then(res => res.json())
         .then(data => {
             setList(data);
@@ -91,11 +97,15 @@ export default function UploadImager() {
             <Button title="Upload" onPress={pickImage}/>
             <FlatList
             data = {list}
-            keyExtractor = {(item) => item.id}
+            keyExtractor={(item, index) => index.toString()}
             renderItem = {({item}) => {
                 return(
                     <View style={styles.item}>
-                        <Image style={styles.image} source={{uri: item.uri}}/>
+                        <Image
+                            style={styles.image}
+                            source={{ uri: item.uri}}
+                            resizeMode={'cover'}
+                        />
                     </View>
                 )}
             }
@@ -113,5 +123,11 @@ const styles = StyleSheet.create({
     headder:{
         fontSize: 20,
         fontWeight: 'bold',
-    }
+    },
+    image:{
+        width: 200,
+        height: 200,
+        marginTop: 5,
+        marginBottom: 5,
+    },
 });
